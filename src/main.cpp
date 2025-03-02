@@ -523,10 +523,10 @@ void skills() {
 
     
     arm.move(127);
-    pros::delay(1000);
+    pros::delay(1500);
     arm.move(0);
 
-    chassis.moveToPoint(12, -26.1, 4000, {.forwards = false, .minSpeed = 115});
+    chassis.moveToPoint(17, -29.1, 4000, {.forwards = false, .minSpeed = 115});
 
     // clamp.set_value(true);
     clamp.set_value(true);
@@ -537,15 +537,128 @@ void skills() {
     intake.move(127);
     hook.move(127);
 
-    chassis.moveToPose(3.25, -43.9, 134.6, 4000, {.minSpeed = 70});
+    chassis.moveToPose(5, -43.9, -148.6, 3000, {.minSpeed = 70});
+    pros::delay(2000);
 
-    chassis.moveToPose(10, -58, 225, 4000, {.minSpeed = 70});
-    chassis.moveToPose(11.8, -58, 203 , 4000, {.minSpeed = 70});
-    
+    chassis.moveToPose(13.1, -53.8, -206, 3000, {.minSpeed = 70});
+    pros::delay(2000);
+
+
+    chassis.moveToPose(16.5, -58, -228 , 3000, {.minSpeed = 70});
+    pros::delay(2000);
+
+
+    arm.move_absolute(110, 50);
+
+    chassis.moveToPose(23, -24.8, -275, 2000, {.minSpeed = 80});
     
 } 
 
+void blueGoalsideHighStake() {
+    // clamp.set_value(true);
+    
+    // // Set arm brake mode to hold at the start
+    // arm.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    // arm.tare_position();
+    
+    // // Start position: 0, 0, -40
+    // chassis.setPose(0, 0, 0);  // Move to (0, 0) with heading -40
 
+   
+    // // // Move the arm with position control
+    // arm.move_absolute(450 * TICKS_PER_ARM_DEGREE, 90);
+    // pros::delay(2000);
+
+
+    // pros::delay(500);
+
+    
+    // arm.move(127);
+    // pros::delay(1000);
+    // arm.move(0);
+
+    // chassis.moveToPoint(-12, -26.1, 4000, {.forwards = false, .minSpeed = 115});
+
+    // // clamp.set_value(true);
+    // clamp.set_value(true);
+    // pros::delay(1500);
+    // clamp.set_value(false);
+
+    // arm.move_absolute(80 * TICKS_PER_ARM_DEGREE, 90);
+    
+    
+    // intake.move(127);
+    // hook.move(127);
+    
+    // // chassis.moveToPose(7.3, -59, 185.4, 8000, {.maxSpeed=90, .minSpeed=60});
+    // // chassis.waitUntilDone();
+
+    
+    // // arm.move_absolute(400 * TICKS_PER_ARM_DEGREE, 90);
+
+    // // pushPiston.set_value(false);
+
+    // // chassis.moveToPoint(5, -42.8, 2000);
+    // // chassis.moveToPose(33, -33, 57.99,3000);
+    // // chassis.waitUntilDone();
+
+    // // arm.move(-127);
+    // // pros::delay(1500);
+    // // arm.move(0);
+
+    // doinker.set_value(true);
+
+    // pros::delay(1000);
+
+    // chassis.moveToPoint(34.37, -27, 2000);
+
+    // intake.move(127);
+    // hook.move(127);
+
+
+    clamp.set_value(true);
+    
+    // Set arm brake mode to hold at the start
+    arm.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    arm.tare_position();
+    
+    // Start position: 0, 0, -40
+    chassis.setPose(0, 0, 0);  // Move to (0, 0) with heading -40
+
+   
+    // // Move the arm with position control
+    arm.move_absolute(450 * TICKS_PER_ARM_DEGREE, 90);
+    pros::delay(2000);
+
+
+    pros::delay(500);
+
+    
+    arm.move(127);
+    pros::delay(1000);
+    arm.move(0);
+
+    chassis.moveToPoint(-13, -26.1, 4000, {.forwards = false, .minSpeed = 115});
+
+    // clamp.set_value(true);
+    clamp.set_value(true);
+    pros::delay(1500);
+    clamp.set_value(false);
+    
+
+    intake.move(127);
+    hook.move(127);
+
+    chassis.moveToPose(-3.25, -43.9, 134.6, 4000, {.minSpeed = 70});
+
+    chassis.moveToPoint(36, -35, 2000);
+
+    doinker.set_value(true);
+
+    intake.move(127);
+    hook.move(127);
+
+}
 void redRight(){
     clamp.set_value(true);
     
@@ -652,8 +765,9 @@ void redRight(){
 void autonomous() {
     // skills();
     // redleft();
-    blueLeft(); // also red right 
-    //blueRight();
+    //blueLeft(); // also red right 
+    // blueRight();
+    blueGoalsideHighStake();
 }
 
 /**
@@ -786,6 +900,10 @@ void opcontrol() {
         hook.move(-127); intake.move(-127);
         } else {
         hook.move(0); intake.move(0);
+        }
+
+        if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)){
+            arm.tare_position();
         }
 
 
